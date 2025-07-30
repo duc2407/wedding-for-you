@@ -1,4 +1,5 @@
 import 'package:fe_wd24/animations/animated_heart_overlay.dart';
+import 'package:fe_wd24/animations/contact.dart';
 import 'package:fe_wd24/screens/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -24,7 +25,8 @@ class MyApp extends StatelessWidget {
               const Breakpoint(start: 801, end: 1200, name: DESKTOP),
             ],
           ),
-          const AnimatedHeartOverlay(), // hiệu ứng tim rơi toàn web
+          const AnimatedHeartOverlay(),
+          const FloatingContactButton(),
         ],
       ),
       debugShowCheckedModeBanner: false,
