@@ -3,10 +3,10 @@ name: Build and Deploy Flutter Web (Dev Only)
 on:
   push:
     branches:
-      - dev   # chỉ chạy khi push vào nhánh dev
+      - dev
   pull_request:
     branches:
-      - dev   # hoặc khi mở/marge PR vào dev
+      - dev 
 
 jobs:
   build-and-deploy:
@@ -19,7 +19,7 @@ jobs:
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.22.1' # hoặc bản bạn đang dùng
+          flutter-version: '3.32.4'
 
       - name: Install dependencies
         run: flutter pub get
