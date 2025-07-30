@@ -1,0 +1,34 @@
+name: Build and Deploy Flutter Web (Dev Only)
+
+on:
+  push:
+    branches:
+      - dev   # chỉ chạy khi push vào nhánh dev
+  pull_request:
+    branches:
+      - dev   # hoặc khi mở/marge PR vào dev
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.22.1' # hoặc bản bạn đang dùng
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Build Flutter Web
+        run: flutter build web --release
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: build/web
