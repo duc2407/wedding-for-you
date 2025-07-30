@@ -1,10 +1,16 @@
+import 'package:fe_wd24/screens/login/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tailwind_colors/tailwind_colors.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +33,7 @@ class HomePage extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                "Bạn cần thiệp cười ư??? ",
+                                "Bạn cần thiệp cưới ư???",
                                 style: GoogleFonts.playfairDisplay(
                                   fontSize: 48,
                                   fontWeight: FontWeight.bold,
@@ -64,6 +70,13 @@ class HomePage extends StatelessWidget {
           },
         ),
       ),
+    );
+  }
+
+  Widget _navItem(String title) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Text(title, style: GoogleFonts.openSans(fontSize: 16, color: TWColors.gray.shade700)),
     );
   }
 
@@ -106,34 +119,52 @@ class HomePage extends StatelessWidget {
               ],
             )
           else
-            Row(
-              children: [
-                IconButton(
-                  icon: const Icon(Icons.menu),
-                  color: TWColors.gray.shade700,
-                  onPressed: () {
-                    // TODO: Open drawer or overlay
-                  },
-                ),
-                // const SizedBox(width: 8),
-                // IconButton(
-                //   icon: const Icon(Icons.login),
-                //   color: TWColors.pink.shade400,
-                //   onPressed: () {
-                //     // TODO: Login
-                //   },
-                // ),
-              ],
-            ),
+            IconButton(icon: const Icon(Icons.menu), color: TWColors.gray.shade700, onPressed: showMobileMenu),
         ],
       ),
     );
   }
 
-  Widget _navItem(String label) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-      child: Text(label, style: GoogleFonts.openSans(fontSize: 16, color: TWColors.gray.shade800)),
+  void showMobileMenu() {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.white,
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(16))),
+      builder: (context) {
+        return Padding(
+          padding: const EdgeInsets.symmetric(vertical: 24.0, horizontal: 16),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              _mobileMenuItem('Trang chủ', Icons.home, () {
+                Navigator.pop(context);
+                print("Đi tới Trang chủ");
+                // Navigator.push(...); hoặc Navigator.of(context).pushNamed('/');
+              }),
+              _mobileMenuItem('Giới thiệu', Icons.info_outline, () {
+                Navigator.pop(context);
+                print("Đi tới Giới thiệu");
+              }),
+              _mobileMenuItem('Liên hệ', Icons.contact_mail, () {
+                Navigator.pop(context);
+                print("Đi tới Liên hệ");
+              }),
+              _mobileMenuItem('Đăng nhập', Icons.login, () {
+                Navigator.pop(context);
+                Navigator.push(context, MaterialPageRoute(builder: (_) => const LoginPage()));
+              }),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _mobileMenuItem(String label, IconData icon, VoidCallback onTap) {
+    return ListTile(
+      leading: Icon(icon, color: TWColors.pink.shade400),
+      title: Text(label, style: GoogleFonts.openSans(fontSize: 16, fontWeight: FontWeight.w600)),
+      onTap: onTap,
     );
   }
 }

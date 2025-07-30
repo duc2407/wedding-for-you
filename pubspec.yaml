@@ -38,6 +38,7 @@ dependencies:
   responsive_framework: ^1.0.0
   tailwind_colors:
   url_launcher:
+  font_awesome_flutter:
 
 dev_dependencies:
   flutter_test:
