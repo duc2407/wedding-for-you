@@ -33,7 +33,7 @@ class _HomePageState extends State<HomePage> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                "Bạn cần thiệp cưới ư???",
+                                "Wedding for you",
                                 style: GoogleFonts.playfairDisplay(
                                   fontSize: 48,
                                   fontWeight: FontWeight.bold,
@@ -43,7 +43,7 @@ class _HomePageState extends State<HomePage> {
                               ),
                               const SizedBox(height: 16),
                               Text(
-                                "Wedding for you chào mừng bạn!!!",
+                                "luôn đồng hành cùng ngày vui của bạn!!!",
                                 style: GoogleFonts.openSans(fontSize: 18, color: Colors.grey[700]),
                                 textAlign: TextAlign.center,
                               ),
@@ -58,6 +58,71 @@ class _HomePageState extends State<HomePage> {
                                 onPressed: () {},
                                 child: const Text("Thử ngay nào"),
                               ),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 16.0),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      padding: const EdgeInsets.all(10),
+                                      width: double.infinity,
+                                      color: Color.fromARGB(255, 255, 153, 189),
+                                      child: Text('Các gói sản phẩm HOT'),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(
+                                height: 290,
+                                width: double.infinity,
+                                child: SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal, // 👈 Cuộn ngang
+                                  child: Row(
+                                    children: [
+                                      CardProduct(),
+                                      SizedBox(width: 6),
+                                      CardProduct(),
+                                      SizedBox(width: 6),
+                                      CardProduct(),
+                                      // Thêm Padding nếu muốn spacing
+                                      SizedBox(width: 6),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 16.0),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      padding: const EdgeInsets.all(10),
+                                      width: double.infinity,
+                                      color: Color.fromARGB(255, 255, 153, 189),
+                                      child: Text('Các gói sản phẩm HOT'),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(
+                                height: 290,
+                                width: double.infinity,
+                                child: SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal, // 👈 Cuộn ngang
+                                  child: Row(
+                                    children: [
+                                      CardProduct(),
+                                      SizedBox(width: 6),
+                                      CardProduct(),
+                                      SizedBox(width: 6),
+                                      CardProduct(),
+                                      // Thêm Padding nếu muốn spacing
+                                      SizedBox(width: 6),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              Container(child: Column(children: [Text('Bản quyền bởi @ducit247')])),
                             ],
                           ),
                         ),
@@ -165,6 +230,52 @@ class _HomePageState extends State<HomePage> {
       leading: Icon(icon, color: TWColors.pink.shade400),
       title: Text(label, style: GoogleFonts.openSans(fontSize: 16, fontWeight: FontWeight.w600)),
       onTap: onTap,
+    );
+  }
+}
+
+class CardProduct extends StatelessWidget {
+  const CardProduct({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+        boxShadow: [BoxShadow(color: Colors.grey.withOpacity(0.2), blurRadius: 8)],
+      ),
+      width: 168,
+      height: 286,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          Center(child: Image.asset('assets/images/product1.jpg', width: 150, height: 150)),
+          Text('Mẫu Saphia'),
+          Text('Giá: 199.000đ'),
+          Center(
+            child: InkWell(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (_) => const LoginPage()));
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  color: const Color.fromARGB(255, 255, 226, 248),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    'Sử dụng ngay',
+                    style: TextStyle(color: const Color.fromARGB(255, 255, 128, 128), fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
