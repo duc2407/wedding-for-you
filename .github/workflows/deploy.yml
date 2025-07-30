@@ -3,10 +3,10 @@ name: Build and Deploy Flutter Web (Dev Only)
 on:
   push:
     branches:
-      - dev   # chỉ chạy khi push vào nhánh dev
+      - dev
   pull_request:
     branches:
-      - dev   # hoặc khi mở/marge PR vào dev
+      - dev
 
 jobs:
   build-and-deploy:
@@ -19,16 +19,17 @@ jobs:
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.22.1' # hoặc bản bạn đang dùng
+          flutter-version: '3.32.4'
 
       - name: Install dependencies
         run: flutter pub get
 
-      - name: Build Flutter Web
-        run: flutter build web --release
+      - name: Build Flutter Web with custom base href
+        run: flutter build web --release --base-href="/wedding-for-you/"
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: build/web
+          publish_branch: gh-pages
