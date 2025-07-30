@@ -27,7 +27,7 @@ class _HomePageState extends State<HomePage> {
                     children: [
                       // Logo
                       Text(
-                        'Wed4U',
+                        'Wedding4U',
                         style: GoogleFonts.playfairDisplay(
                           fontSize: 28,
                           fontWeight: FontWeight.bold,
