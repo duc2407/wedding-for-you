@@ -86,6 +86,8 @@ class _HomePageState extends State<HomePage> {
                                       CardProduct(),
                                       // Thêm Padding nếu muốn spacing
                                       SizedBox(width: 6),
+                                      CardProduct(),
+                                      SizedBox(width: 6),
                                     ],
                                   ),
                                 ),
@@ -108,7 +110,7 @@ class _HomePageState extends State<HomePage> {
                                 height: 290,
                                 width: double.infinity,
                                 child: SingleChildScrollView(
-                                  scrollDirection: Axis.horizontal, // 👈 Cuộn ngang
+                                  scrollDirection: Axis.horizontal,
                                   child: Row(
                                     children: [
                                       CardProduct(),
@@ -116,7 +118,8 @@ class _HomePageState extends State<HomePage> {
                                       CardProduct(),
                                       SizedBox(width: 6),
                                       CardProduct(),
-                                      // Thêm Padding nếu muốn spacing
+                                      SizedBox(width: 6),
+                                      CardProduct(),
                                       SizedBox(width: 6),
                                     ],
                                   ),
