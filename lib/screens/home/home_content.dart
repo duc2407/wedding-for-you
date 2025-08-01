@@ -51,6 +51,46 @@ class _HomeContentState extends State<HomeContent> {
             padding: const EdgeInsets.all(24.0),
             child: Column(
               children: [
+                Container(
+                  color: Colors.white,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        flex: 2,
+                        child: Column(
+                          children: [
+                            Text(
+                              'Đến với Wedding for you',
+                              style: GoogleFonts.openSans(
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold,
+                                color: TWColors.pink.shade500,
+                              ),
+                            ),
+                            Text(
+                              'Tự thiết kế thiệp cưới',
+                              style: GoogleFonts.openSans(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: TWColors.pink.shade500,
+                              ),
+                            ),
+                            Text(
+                              'chưa bao giờ dễ dàng đến thế',
+                              style: GoogleFonts.openSans(
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold,
+                                color: TWColors.pink.shade500,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(width: 16), // khoảng cách giữa chữ và ảnh
+                      SizedBox(width: 200, child: Image.asset('assets/images/banner.jpg', fit: BoxFit.cover)),
+                    ],
+                  ),
+                ),
                 Text(
                   "Wedding for you",
                   style: GoogleFonts.playfairDisplay(
