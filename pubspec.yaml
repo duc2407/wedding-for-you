@@ -39,6 +39,7 @@ dependencies:
   tailwind_colors:
   url_launcher:
   font_awesome_flutter:
+  flutter_animate: 
 
 dev_dependencies:
   flutter_test:
