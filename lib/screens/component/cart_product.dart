@@ -10,55 +10,73 @@ class CardProduct extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap, // 👉 Thay vì đẩy thẳng LoginPage, dùng callback truyền vào
+      onTap: onTap,
       child: Container(
-        width: 168,
-        height: 286,
+        width: 160,
+        height: 260,
+        margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(12),
-          boxShadow: [BoxShadow(color: Colors.grey.withOpacity(0.2), blurRadius: 8)],
+          borderRadius: BorderRadius.circular(16),
+          boxShadow: [BoxShadow(color: Colors.grey.withOpacity(0.15), blurRadius: 12, offset: const Offset(0, 6))],
         ),
         child: Stack(
           children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Center(
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 16.0),
-                    child: Image.asset(product.imageAsset, width: 150, height: 150),
-                  ),
-                ),
-                Padding(padding: const EdgeInsets.symmetric(horizontal: 12.0), child: Text(product.name)),
-                Padding(padding: const EdgeInsets.symmetric(horizontal: 12.0), child: Text('Giá: ${product.price}')),
-                Center(
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      color: const Color.fromARGB(255, 255, 226, 248),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(12, 16, 12, 12),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Center(
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(12),
+                      child: Image.asset(product.imageAsset, width: 120, height: 120, fit: BoxFit.cover),
                     ),
-                    child: const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text(
+                  ),
+                  const SizedBox(height: 12),
+                  Text(
+                    product.name,
+                    style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 14, color: Colors.black87),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    'Giá: ${product.price}',
+                    style: const TextStyle(fontSize: 13, color: Colors.pink, fontWeight: FontWeight.w500),
+                  ),
+                  const Spacer(),
+                  Center(
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFFFEEF4),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: const Text(
                         'Sử dụng ngay',
-                        style: TextStyle(color: Color.fromARGB(255, 255, 128, 128), fontWeight: FontWeight.bold),
+                        style: TextStyle(color: Color(0xFFFF6B81), fontWeight: FontWeight.bold, fontSize: 13),
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
             Positioned(
               top: 10,
-              right: 8,
+              right: 10,
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                decoration: BoxDecoration(color: Colors.redAccent, borderRadius: BorderRadius.circular(6)),
+                decoration: BoxDecoration(
+                  color: Colors.redAccent,
+                  borderRadius: BorderRadius.circular(6),
+                  boxShadow: [
+                    BoxShadow(color: Colors.redAccent.withOpacity(0.4), blurRadius: 4, offset: const Offset(0, 2)),
+                  ],
+                ),
                 child: const Text(
                   'Mẫu mới',
-                  style: TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.bold),
+                  style: TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.bold),
                 ),
               ),
             ),

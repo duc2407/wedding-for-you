@@ -1,3 +1,4 @@
+import 'package:fe_wd24/animations/step_create_website/steps_intro_section.dart';
 import 'package:fe_wd24/models/product_model.dart';
 import 'package:fe_wd24/screens/component/cart_product.dart';
 import 'package:fe_wd24/screens/detail_product/detail_product.dart';
@@ -48,76 +49,135 @@ class _HomeContentState extends State<HomeContent> {
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 1000),
           child: Padding(
-            padding: const EdgeInsets.all(24.0),
+            padding: const EdgeInsets.all(20.0),
             child: Column(
               children: [
+                // Container(
+                //   padding: const EdgeInsets.only(left: 16, right: 16),
+                //   decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), color: Colors.white),
+                //   child: Row(
+                //     children: [
+                //       Expanded(
+                //         flex: 2,
+                //         child: Column(
+                //           children: [
+                //             Text(
+                //               'Tự thiết kế thiệp cưới',
+                //               style: GoogleFonts.openSans(
+                //                 fontSize: 16,
+                //                 fontWeight: FontWeight.bold,
+                //                 color: TWColors.pink.shade500,
+                //               ),
+                //             ),
+                //             Text(
+                //               'chưa bao giờ dễ dàng đến thế',
+                //               style: GoogleFonts.openSans(
+                //                 fontSize: 14,
+                //                 fontWeight: FontWeight.bold,
+                //                 color: TWColors.pink.shade500,
+                //               ),
+                //             ),
+                //           ],
+                //         ),
+                //       ),
+                //       const SizedBox(width: 16),
+                //       SizedBox(width: 200, child: Image.asset('assets/images/banner.jpg', fit: BoxFit.cover)),
+                //     ],
+                //   ),
+                // ),
                 Container(
-                  color: Colors.white,
-                  child: Row(
+                  child: Column(
                     children: [
-                      Expanded(
-                        flex: 2,
-                        child: Column(
-                          children: [
-                            Text(
-                              'Đến với Wedding for you',
-                              style: GoogleFonts.openSans(
-                                fontSize: 14,
-                                fontWeight: FontWeight.bold,
-                                color: TWColors.pink.shade500,
-                              ),
-                            ),
-                            Text(
-                              'Tự thiết kế thiệp cưới',
-                              style: GoogleFonts.openSans(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                                color: TWColors.pink.shade500,
-                              ),
-                            ),
-                            Text(
-                              'chưa bao giờ dễ dàng đến thế',
-                              style: GoogleFonts.openSans(
-                                fontSize: 14,
-                                fontWeight: FontWeight.bold,
-                                color: TWColors.pink.shade500,
-                              ),
-                            ),
-                          ],
+                      Text(
+                        "Wedding for you",
+                        style: GoogleFonts.playfairDisplay(
+                          fontSize: 48,
+                          fontWeight: FontWeight.bold,
+                          color: TWColors.pink.shade500,
                         ),
+                        textAlign: TextAlign.center,
                       ),
-                      const SizedBox(width: 16), // khoảng cách giữa chữ và ảnh
-                      SizedBox(width: 200, child: Image.asset('assets/images/banner.jpg', fit: BoxFit.cover)),
+                      const SizedBox(height: 16),
+                      Text(
+                        "luôn đồng hành cùng ngày vui của bạn!!!",
+                        style: GoogleFonts.openSans(fontSize: 18, color: Colors.grey[700]),
+                        textAlign: TextAlign.center,
+                      ),
+                      // const SizedBox(height: 40),
+                      // ElevatedButton(
+                      //   style: ElevatedButton.styleFrom(
+                      //     backgroundColor: const Color.fromARGB(255, 255, 153, 189),
+                      //     foregroundColor: Colors.white,
+                      //     padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                      //     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                      //   ),
+                      //   onPressed: () {},
+                      //   child: const Text("Thử ngay nào"),
+                      // ),
+                      const SizedBox(height: 24),
                     ],
                   ),
                 ),
-                Text(
-                  "Wedding for you",
-                  style: GoogleFonts.playfairDisplay(
-                    fontSize: 48,
-                    fontWeight: FontWeight.bold,
-                    color: TWColors.pink.shade500,
+
+                Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), color: Colors.white),
+                  child: Column(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.only(left: 16, right: 16),
+                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), color: Colors.white),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              flex: 2,
+                              child: Column(
+                                children: [
+                                  Text(
+                                    'Tự thiết kế thiệp cưới',
+                                    style: GoogleFonts.openSans(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                      color: TWColors.pink.shade500,
+                                    ),
+                                  ),
+                                  Text(
+                                    'chưa bao giờ dễ dàng đến thế',
+                                    style: GoogleFonts.openSans(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold,
+                                      color: TWColors.pink.shade500,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(width: 16),
+                            SizedBox(width: 200, child: Image.asset('assets/images/banner.jpg', fit: BoxFit.cover)),
+                          ],
+                        ),
+                      ),
+                      Text(
+                        'Chỉ cần thực hiện 3 bước đơn giản để tạo ra thiệp cưới độc đáo của riêng bạn.',
+                        style: GoogleFonts.openSans(fontSize: 14, color: Colors.grey[700]),
+                        textAlign: TextAlign.center,
+                      ),
+                      StepSliderEffect(),
+
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color.fromARGB(255, 255, 153, 189),
+                          foregroundColor: Colors.white,
+                          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                        ),
+                        onPressed: () {},
+                        child: const Text("Thử ngay nào"),
+                      ),
+                      // const SizedBox(height: 24
+                    ],
                   ),
-                  textAlign: TextAlign.center,
                 ),
-                const SizedBox(height: 16),
-                Text(
-                  "luôn đồng hành cùng ngày vui của bạn!!!",
-                  style: GoogleFonts.openSans(fontSize: 18, color: Colors.grey[700]),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 40),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color.fromARGB(255, 255, 153, 189),
-                    foregroundColor: Colors.white,
-                    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                  ),
-                  onPressed: () {},
-                  child: const Text("Thử ngay nào"),
-                ),
-                const SizedBox(height: 24),
                 _section('Các mẫu mới'),
                 _horizontalList(context),
                 const SizedBox(height: 24),
@@ -135,9 +195,26 @@ class _HomeContentState extends State<HomeContent> {
 
   Widget _section(String title) {
     return Container(
+      decoration: BoxDecoration(
+        color: Color.fromARGB(255, 255, 153, 189),
+        borderRadius: BorderRadius.circular(6),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.2),
+            spreadRadius: 2,
+            blurRadius: 10,
+            offset: Offset(2, 4), // đổ bóng nhẹ bên dưới
+          ),
+        ],
+      ),
+      // decoration: BoxDecoration(
+      //   borderRadius: BorderRadius.circular(6),
+      //   color: const Color.fromARGB(255, 255, 153, 189),
+      //   boxShadow: [BoxShadow(color: Colors.grey.withOpacity(0.1), blurRadius: 8)],
+      // ),
       padding: const EdgeInsets.all(10),
       width: double.infinity,
-      color: const Color.fromARGB(255, 255, 153, 189),
+      // color: const Color.fromARGB(255, 255, 153, 189),
       child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [Text(title), Text('Xem thêm')]),
     );
   }
