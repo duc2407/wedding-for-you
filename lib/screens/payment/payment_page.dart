@@ -46,19 +46,23 @@ class _PaymentPagesState extends State<PaymentPages> {
     final String momoQrUrl = 'assets/images/momo.jpg';
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Thanh toán mẫu thiệp')),
+      appBar: AppBar(
+        title: Text("Thanh toán mẫu ${widget.templateId}"),
+        backgroundColor: Colors.pinkAccent,
+        foregroundColor: Colors.white,
+        elevation: 2,
+      ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Giá mẫu thiệp: ${widget.templatePrice}đ',
-              style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+              'Số tiền cần thanh toán: ${widget.templatePrice}đ',
+              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 24),
-            const Text('Chọn hình thức thanh toán:', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
-            const SizedBox(height: 12),
+            const Text('Chọn hình thức thanh toán:', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500)),
+            const SizedBox(height: 6),
 
             _buildPaymentOption(
               method: PaymentMethod.bankTransfer,
@@ -68,11 +72,8 @@ class _PaymentPagesState extends State<PaymentPages> {
                 children: [
                   const Divider(),
                   Text('Ngân hàng: $bankName', style: const TextStyle(fontSize: 16)),
-                  const SizedBox(height: 6),
                   _buildCopyRow(label: 'Số tài khoản:', value: accountNumber),
-                  const SizedBox(height: 6),
                   _buildCopyRow(label: 'Số tài khoản:', value: "NGUYEN MINH DUC"),
-                  const SizedBox(height: 6),
                   _buildCopyRow(label: 'Nội dung:', value: paymentContent),
                   const SizedBox(height: 12),
                   Center(child: Image.network(vietQrUrl, height: 180)),
@@ -102,6 +103,8 @@ class _PaymentPagesState extends State<PaymentPages> {
               child: Column(
                 children: [
                   const Divider(),
+                  _buildCopyRow(label: 'Số điện thoại:', value: "0395931862"),
+                  _buildCopyRow(label: 'Nội dung:', value: paymentContent),
                   Center(child: Image.asset(momoQrUrl, height: 180)),
                   const SizedBox(height: 6),
                   Center(
@@ -209,7 +212,7 @@ class _PaymentPagesState extends State<PaymentPages> {
         Expanded(child: Text('$label $value', style: const TextStyle(fontSize: 15))),
         IconButton(
           tooltip: 'Copy',
-          icon: const Icon(Icons.copy, size: 20),
+          icon: const Icon(Icons.copy, size: 15),
           onPressed: () {
             Clipboard.setData(ClipboardData(text: value));
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Đã copy: $label')));

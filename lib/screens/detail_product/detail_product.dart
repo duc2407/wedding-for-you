@@ -127,7 +127,7 @@ class ProductDetailScreen extends StatelessWidget {
                       builder: (_) => PaymentPages(
                         templateId: 'TPL123', // mã mẫu
                         templatePrice: 490000,
-                        userName: 'Nguyễn Văn A',
+                        userName: 'Nguyễn Minh Đức',
                       ),
                     ),
                   );
