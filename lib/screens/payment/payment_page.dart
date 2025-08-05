@@ -63,7 +63,6 @@ class _PaymentPagesState extends State<PaymentPages> {
             ),
             const Text('Chọn hình thức thanh toán:', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500)),
             const SizedBox(height: 6),
-
             _buildPaymentOption(
               method: PaymentMethod.bankTransfer,
               title: 'Chuyển khoản ngân hàng',
