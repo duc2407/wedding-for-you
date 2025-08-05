@@ -40,6 +40,8 @@ dependencies:
   url_launcher:
   font_awesome_flutter:
   flutter_animate: 
+  smooth_page_indicator:
+
 
 dev_dependencies:
   flutter_test:

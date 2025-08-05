@@ -14,7 +14,7 @@ class CardProduct extends StatelessWidget {
       child: Container(
         width: 160,
         height: 260,
-        margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
+        margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 12),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(16),
