@@ -1,6 +1,7 @@
 import 'package:fe_wd24/animations/step_create_website/steps_intro_section.dart';
 import 'package:fe_wd24/models/product_model.dart';
 import 'package:fe_wd24/screens/component/cart_product.dart';
+import 'package:fe_wd24/screens/component/list_product.dart';
 import 'package:fe_wd24/screens/detail_product/detail_product.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -174,16 +175,14 @@ class _HomeContentState extends State<HomeContent> {
                         onPressed: () {},
                         child: const Text("Thử ngay nào"),
                       ),
-                      // const SizedBox(height: 24
                     ],
                   ),
                 ),
-                _section('Các mẫu mới'),
-                _horizontalList(context),
                 const SizedBox(height: 24),
-                _section('Các mẫu nổi bật'),
-                _horizontalList(context),
-                const SizedBox(height: 32),
+                ListProduct(product: mockProducts, title: 'Các mẫu mới'),
+                const SizedBox(height: 24),
+                ListProduct(product: mockProducts, title: 'Các mẫu nổi bật'),
+                const SizedBox(height: 24),
                 const Text('Bản quyền bởi @ducit247'),
               ],
             ),

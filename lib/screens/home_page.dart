@@ -18,8 +18,8 @@ class _HomePageState extends State<HomePage> {
 
   final List<Widget> pages = const [
     HomeContent(), // Trang chính
-    AboutPage(), // Trang giới thiệu (tạm thời)
     ContactPage(), // Trang liên hệ (tạm thời)
+    AboutPage(), // Trang giới thiệu (tạm thời)
   ];
 
   @override
@@ -124,9 +124,9 @@ class _HomePageState extends State<HomePage> {
             mainAxisSize: MainAxisSize.min,
             children: [
               _mobileMenuItem('Trang chủ', 0, Icons.home),
-              _mobileMenuItem('Giới thiệu', 1, Icons.info_outline),
-              _mobileMenuItem('Liên hệ', 2, Icons.contact_mail),
-              _mobileMenuItem('Đăng nhập', null, Icons.login, goToLogin: true),
+              _mobileMenuItem('Dịch vụ', 1, Icons.contact_mail),
+              _mobileMenuItem('Giới thiệu', 2, Icons.info_outline),
+              _mobileMenuItem('Đăng nhập', 3, Icons.login, goToLogin: true),
             ],
           ),
         );

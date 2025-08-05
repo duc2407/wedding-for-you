@@ -34,7 +34,7 @@ class AboutPage extends StatelessWidget {
             ),
             const SizedBox(height: 20),
 
-            Image.asset('assets/images/banner.jpg', width: imageSize, height: imageSize),
+            Image.asset('assets/images/logo_bg.png', width: imageSize, height: imageSize),
             const SizedBox(height: 20),
 
             Text(
