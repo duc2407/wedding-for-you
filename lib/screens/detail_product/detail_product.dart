@@ -1,5 +1,6 @@
 // ignore: deprecated_member_use
 import 'dart:html' as html;
+import 'package:fe_wd24/screens/payment/payment_page.dart';
 import 'package:flutter/material.dart';
 import 'package:fe_wd24/models/product_model.dart';
 import 'package:fe_wd24/screens/component/evaluate_user.dart';
@@ -120,7 +121,16 @@ class ProductDetailScreen extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(vertical: 14),
                 ),
                 onPressed: () {
-                  // TODO: Handle sử dụng
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => PaymentPages(
+                        templateId: 'TPL123', // mã mẫu
+                        templatePrice: 490000,
+                        userName: 'Nguyễn Văn A',
+                      ),
+                    ),
+                  );
                 },
                 icon: const Icon(Icons.check, color: Colors.white),
                 label: const Text('Sử dụng', style: TextStyle(color: Colors.white)),
@@ -136,7 +146,7 @@ class ProductDetailScreen extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(vertical: 14),
                 ),
                 onPressed: () {
-                  html.window.open('https://wedding4u.online', '_blank');
+                  html.window.open('https://www.mewedding.vn/giao-dien-flowers-pro', '_blank');
                 },
                 icon: const Icon(Icons.visibility),
                 label: const Text('Xem Demo'),
