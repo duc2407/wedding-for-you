@@ -22,9 +22,12 @@ jobs:
       - name: Build Flutter Web for dev
         run: flutter build web --release --base-href="/wedding-for-you/"
 
+      - name: Remove custom domain (CNAME) for dev
+        run: rm -f build/web/CNAME
+
       - name: Deploy to GitHub Pages (Dev)
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: build/web
-          publish_branch: gh-pages-dev  # ✅ deploy riêng tránh đụng production
+          publish_branch: gh-pages-dev
