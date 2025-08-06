@@ -105,7 +105,6 @@ class _PaymentPagesState extends State<PaymentPages> {
                         ],
                       ),
                     ),
-
                     const SizedBox(height: 16),
 
                     _buildPaymentOption(
