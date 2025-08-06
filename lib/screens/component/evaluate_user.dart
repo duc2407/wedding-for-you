@@ -19,11 +19,7 @@ class _RatingBoxState extends State<RatingBox> {
     FocusScope.of(context).unfocus();
 
     setState(() {
-      _ratings.add({
-        'name': 'Nguyễn Minh Đức',
-        'avatar': 'https://i.pravatar.cc/150?img=3', // random avatar
-        'comment': text,
-      });
+      _ratings.add({'name': 'Nguyễn Minh Đức', 'avatar': 'https://i.pravatar.cc/150?img=3', 'comment': text});
       _controller.clear();
     });
   }

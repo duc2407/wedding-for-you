@@ -26,12 +26,12 @@ class _ManagerOrderState extends State<ManagerOrder> {
     },
   );
 
-  final int itemsPerPage = 5;
   int currentPage = 0;
+  final int itemsPerPage = 6;
 
   List<Map<String, dynamic>> get paginatedOrders {
     final start = currentPage * itemsPerPage;
-    final end = (start + itemsPerPage) > allOrders.length ? allOrders.length : (start + itemsPerPage);
+    final end = (start + itemsPerPage).clamp(0, allOrders.length);
     return allOrders.sublist(start, end);
   }
 
@@ -61,144 +61,134 @@ class _ManagerOrderState extends State<ManagerOrder> {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isDesktop = screenWidth > 600;
+
     return Scaffold(
       backgroundColor: TWColors.gray.shade50,
       appBar: AppBar(title: const Text("Thiệp đã mua"), backgroundColor: TWColors.pink.shade100, elevation: 0),
-      body: Column(
-        children: [
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: ListView.separated(
-                itemCount: paginatedOrders.length,
-                separatorBuilder: (_, __) => const SizedBox(height: 20),
-                itemBuilder: (context, index) {
-                  final order = paginatedOrders[index];
-                  final statusColor = _statusColor(order['status']);
-
-                  return Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(16),
-                      boxShadow: const [BoxShadow(color: Colors.black12, blurRadius: 8, offset: Offset(0, 4))],
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        ClipRRect(
-                          borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
-                          child: Image.network(order['image'], width: double.infinity, height: 180, fit: BoxFit.cover),
+      body: Center(
+        child: Container(
+          padding: const EdgeInsets.all(16.0),
+          constraints: const BoxConstraints(maxWidth: 1200),
+          child: Column(
+            children: [
+              Expanded(
+                child: isDesktop
+                    ? GridView.builder(
+                        itemCount: paginatedOrders.length,
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: screenWidth > 1000 ? 3 : 2,
+                          mainAxisSpacing: 16,
+                          crossAxisSpacing: 16,
+                          childAspectRatio: 3 / 4.5,
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                order['title'],
-                                style: GoogleFonts.openSans(fontSize: 18, fontWeight: FontWeight.w700),
-                              ),
-                              const SizedBox(height: 8),
-                              Row(
-                                children: [
-                                  Container(
-                                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                                    decoration: BoxDecoration(
-                                      color: statusColor.withOpacity(0.1),
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    child: Text(
-                                      order['status'],
-                                      style: GoogleFonts.openSans(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w600,
-                                        color: statusColor,
-                                      ),
-                                    ),
-                                  ),
-                                  const Spacer(),
-                                  if (order['status'] != 'Đã hết hạn')
-                                    Row(
-                                      children: [
-                                        ElevatedButton(
-                                          onPressed: () => _openLink(order['link']),
-                                          style: ElevatedButton.styleFrom(
-                                            backgroundColor: TWColors.purple.shade400,
-                                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                                          ),
-                                          child: Text('Xem thiệp', style: GoogleFonts.openSans(color: Colors.white)),
-                                        ),
-                                        const SizedBox(width: 8),
-                                        ElevatedButton(
-                                          onPressed: () {},
-                                          style: ElevatedButton.styleFrom(
-                                            backgroundColor: TWColors.pink.shade400,
-                                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                                          ),
-                                          child: Text('Chỉnh sửa', style: GoogleFonts.openSans(color: Colors.white)),
-                                        ),
-                                      ],
-                                    )
-                                  else
-                                    ElevatedButton(
-                                      onPressed: () => _openLink(order['link']),
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor: TWColors.gray.shade400,
-                                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                                      ),
-                                      child: Text('Xem thiệp', style: GoogleFonts.openSans(color: Colors.white)),
-                                    ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
+                        itemBuilder: (context, index) {
+                          return _buildOrderCard(paginatedOrders[index], isDesktop);
+                        },
+                      )
+                    : ListView.separated(
+                        itemCount: paginatedOrders.length,
+                        separatorBuilder: (_, __) => const SizedBox(height: 16),
+                        itemBuilder: (context, index) {
+                          return _buildOrderCard(paginatedOrders[index], isDesktop);
+                        },
+                      ),
               ),
+              if (totalPages > 1)
+                Padding(
+                  padding: const EdgeInsets.only(top: 12),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      IconButton(
+                        onPressed: currentPage > 0 ? () => setState(() => currentPage--) : null,
+                        icon: const Icon(Icons.chevron_left),
+                      ),
+                      Text('Trang ${currentPage + 1} / $totalPages'),
+                      IconButton(
+                        onPressed: currentPage < totalPages - 1 ? () => setState(() => currentPage++) : null,
+                        icon: const Icon(Icons.chevron_right),
+                      ),
+                    ],
+                  ),
+                ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildOrderCard(Map<String, dynamic> order, bool isDesktop) {
+    final statusColor = _statusColor(order['status']);
+
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: const [BoxShadow(color: Colors.black12, blurRadius: 6, offset: Offset(0, 4))],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Ảnh
+          ClipRRect(
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
+            child: Image.network(
+              order['image'],
+              width: double.infinity,
+              height: isDesktop ? 120 : 160,
+              fit: BoxFit.cover,
             ),
           ),
-          Container(
-            padding: const EdgeInsets.symmetric(vertical: 12),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              boxShadow: const [BoxShadow(color: Colors.black12, blurRadius: 6, offset: Offset(0, -2))],
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+          // Nội dung
+          Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                IconButton(
-                  icon: const Icon(Icons.arrow_back_ios_new, size: 18),
-                  onPressed: currentPage > 0 ? () => setState(() => currentPage--) : null,
-                  color: currentPage > 0 ? TWColors.pink.shade400 : Colors.grey,
-                ),
-                ...List.generate(totalPages, (i) {
-                  final isActive = i == currentPage;
-                  return GestureDetector(
-                    onTap: () => setState(() => currentPage = i),
-                    child: Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 4),
-                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                Text(order['title'], style: GoogleFonts.openSans(fontSize: 16, fontWeight: FontWeight.w600)),
+                const SizedBox(height: 6),
+                Row(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                       decoration: BoxDecoration(
-                        color: isActive ? TWColors.pink.shade400 : TWColors.gray.shade200,
+                        color: statusColor.withOpacity(0.1),
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: Text(
-                        '${i + 1}',
-                        style: GoogleFonts.openSans(
-                          color: isActive ? Colors.white : Colors.black87,
-                          fontWeight: FontWeight.w600,
-                        ),
+                        order['status'],
+                        style: GoogleFonts.openSans(fontSize: 13, fontWeight: FontWeight.w600, color: statusColor),
                       ),
                     ),
-                  );
-                }),
-                IconButton(
-                  icon: const Icon(Icons.arrow_forward_ios, size: 18),
-                  onPressed: currentPage < totalPages - 1 ? () => setState(() => currentPage++) : null,
-                  color: currentPage < totalPages - 1 ? TWColors.pink.shade400 : Colors.grey,
+                    const Spacer(),
+                    if (order['status'] != 'Đã hết hạn')
+                      Row(
+                        children: [
+                          IconButton(
+                            onPressed: () => _openLink(order['link']),
+                            icon: const Icon(Icons.visibility),
+                            tooltip: 'Xem thiệp',
+                            color: TWColors.purple.shade400,
+                          ),
+                          IconButton(
+                            onPressed: () {},
+                            icon: const Icon(Icons.edit),
+                            tooltip: 'Chỉnh sửa',
+                            color: TWColors.pink.shade400,
+                          ),
+                        ],
+                      )
+                    else
+                      IconButton(
+                        onPressed: () => _openLink(order['link']),
+                        icon: const Icon(Icons.visibility_off),
+                        tooltip: 'Thiệp đã hết hạn',
+                        color: TWColors.gray.shade400,
+                      ),
+                  ],
                 ),
               ],
             ),
