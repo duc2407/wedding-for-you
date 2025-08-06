@@ -1,3 +1,4 @@
+import 'package:fe_wd24/screens/component/footer_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -93,6 +94,7 @@ class AboutPage extends StatelessWidget {
               style: GoogleFonts.openSans(fontSize: isMobile ? 13 : 14, fontWeight: FontWeight.w600),
               textAlign: TextAlign.center,
             ),
+            FooterWidget(),
           ],
         ),
       ),

@@ -1,6 +1,7 @@
 import 'package:fe_wd24/animations/step_create_website/steps_intro_section.dart';
 import 'package:fe_wd24/models/product_model.dart';
 import 'package:fe_wd24/screens/component/cart_product.dart';
+import 'package:fe_wd24/screens/component/footer_widget.dart';
 import 'package:fe_wd24/screens/component/list_product.dart';
 import 'package:fe_wd24/screens/detail_product/detail_product.dart';
 import 'package:flutter/material.dart';
@@ -53,39 +54,6 @@ class _HomeContentState extends State<HomeContent> {
             padding: const EdgeInsets.all(20.0),
             child: Column(
               children: [
-                // Container(
-                //   padding: const EdgeInsets.only(left: 16, right: 16),
-                //   decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), color: Colors.white),
-                //   child: Row(
-                //     children: [
-                //       Expanded(
-                //         flex: 2,
-                //         child: Column(
-                //           children: [
-                //             Text(
-                //               'Tự thiết kế thiệp cưới',
-                //               style: GoogleFonts.openSans(
-                //                 fontSize: 16,
-                //                 fontWeight: FontWeight.bold,
-                //                 color: TWColors.pink.shade500,
-                //               ),
-                //             ),
-                //             Text(
-                //               'chưa bao giờ dễ dàng đến thế',
-                //               style: GoogleFonts.openSans(
-                //                 fontSize: 14,
-                //                 fontWeight: FontWeight.bold,
-                //                 color: TWColors.pink.shade500,
-                //               ),
-                //             ),
-                //           ],
-                //         ),
-                //       ),
-                //       const SizedBox(width: 16),
-                //       SizedBox(width: 200, child: Image.asset('assets/images/banner.jpg', fit: BoxFit.cover)),
-                //     ],
-                //   ),
-                // ),
                 Container(
                   child: Column(
                     children: [
@@ -104,17 +72,6 @@ class _HomeContentState extends State<HomeContent> {
                         style: GoogleFonts.openSans(fontSize: 18, color: Colors.grey[700]),
                         textAlign: TextAlign.center,
                       ),
-                      // const SizedBox(height: 40),
-                      // ElevatedButton(
-                      //   style: ElevatedButton.styleFrom(
-                      //     backgroundColor: const Color.fromARGB(255, 255, 153, 189),
-                      //     foregroundColor: Colors.white,
-                      //     padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-                      //     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                      //   ),
-                      //   onPressed: () {},
-                      //   child: const Text("Thử ngay nào"),
-                      // ),
                       const SizedBox(height: 24),
                     ],
                   ),
@@ -183,7 +140,7 @@ class _HomeContentState extends State<HomeContent> {
                 const SizedBox(height: 24),
                 ListProduct(product: mockProducts, title: 'Các mẫu nổi bật'),
                 const SizedBox(height: 24),
-                const Text('Bản quyền bởi @ducit247'),
+                FooterWidget(),
               ],
             ),
           ),
@@ -206,14 +163,8 @@ class _HomeContentState extends State<HomeContent> {
           ),
         ],
       ),
-      // decoration: BoxDecoration(
-      //   borderRadius: BorderRadius.circular(6),
-      //   color: const Color.fromARGB(255, 255, 153, 189),
-      //   boxShadow: [BoxShadow(color: Colors.grey.withOpacity(0.1), blurRadius: 8)],
-      // ),
       padding: const EdgeInsets.all(10),
       width: double.infinity,
-      // color: const Color.fromARGB(255, 255, 153, 189),
       child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [Text(title), Text('Xem thêm')]),
     );
   }

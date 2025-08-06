@@ -40,44 +40,50 @@ class _ProductImageCarouselState extends State<ProductImageCarousel> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final double squareSize = size.width * 0.8;
+    final bool isMobile = size.width < 600;
+    final double maxWidth = isMobile ? size.width * 0.9 : 400;
 
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        ClipRRect(
-          borderRadius: BorderRadius.circular(16),
-          child: SizedBox(
-            width: squareSize,
-            height: squareSize,
-            child: PageView.builder(
-              controller: _pageController,
-              itemCount: widget.imageAssets.length,
-              onPageChanged: (index) => setState(() => _currentIndex = index),
-              itemBuilder: (context, index) {
-                final isActive = index == _currentIndex;
-                return AnimatedScale(
-                  scale: isActive ? 1.0 : 0.95,
-                  duration: const Duration(milliseconds: 400),
-                  child: Image.asset(widget.imageAssets[index], fit: BoxFit.cover),
-                );
-              },
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(16),
+              child: SizedBox(
+                width: maxWidth,
+                height: maxWidth,
+                child: PageView.builder(
+                  controller: _pageController,
+                  itemCount: widget.imageAssets.length,
+                  onPageChanged: (index) => setState(() => _currentIndex = index),
+                  itemBuilder: (context, index) {
+                    final isActive = index == _currentIndex;
+                    return AnimatedScale(
+                      scale: isActive ? 1.0 : 0.95,
+                      duration: const Duration(milliseconds: 400),
+                      child: Image.asset(widget.imageAssets[index], fit: BoxFit.cover),
+                    );
+                  },
+                ),
+              ),
             ),
-          ),
+            const SizedBox(height: 16),
+            SmoothPageIndicator(
+              controller: _pageController,
+              count: widget.imageAssets.length,
+              effect: WormEffect(
+                dotHeight: 10,
+                dotWidth: 10,
+                spacing: 8,
+                dotColor: Colors.grey.shade300,
+                activeDotColor: Colors.pinkAccent,
+              ),
+            ),
+          ],
         ),
-        const SizedBox(height: 16),
-        SmoothPageIndicator(
-          controller: _pageController,
-          count: widget.imageAssets.length,
-          effect: WormEffect(
-            dotHeight: 10,
-            dotWidth: 10,
-            spacing: 8,
-            dotColor: Colors.grey.shade300,
-            activeDotColor: Colors.pinkAccent,
-          ),
-        ),
-      ],
+      ),
     );
   }
 }
