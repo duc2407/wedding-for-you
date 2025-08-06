@@ -1,3 +1,4 @@
+import 'package:fe_wd24/screens/edit/edit_template.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tailwind_colors/tailwind_colors.dart';
@@ -174,7 +175,9 @@ class _ManagerOrderState extends State<ManagerOrder> {
                             color: TWColors.purple.shade400,
                           ),
                           IconButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(context, MaterialPageRoute(builder: (_) => const EditTemplate()));
+                            },
                             icon: const Icon(Icons.edit),
                             tooltip: 'Chỉnh sửa',
                             color: TWColors.pink.shade400,

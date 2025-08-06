@@ -41,7 +41,7 @@ dependencies:
   font_awesome_flutter:
   flutter_animate: 
   smooth_page_indicator:
-
+  image_picker: 
 
 dev_dependencies:
   flutter_test:
