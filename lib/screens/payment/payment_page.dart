@@ -52,121 +52,141 @@ class _PaymentPagesState extends State<PaymentPages> {
         foregroundColor: Colors.white,
         elevation: 2,
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Số tiền cần thanh toán: ${widget.templatePrice}đ',
-              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-            ),
-            const Text('Chọn hình thức thanh toán:', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500)),
-            const SizedBox(height: 6),
-            _buildPaymentOption(
-              method: PaymentMethod.bankTransfer,
-              title: 'Chuyển khoản ngân hàng',
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Divider(),
-                  Text('Ngân hàng: $bankName', style: const TextStyle(fontSize: 16)),
-                  _buildCopyRow(label: 'Số tài khoản:', value: accountNumber),
-                  _buildCopyRow(label: 'Số tài khoản:', value: "NGUYEN MINH DUC"),
-                  _buildCopyRow(label: 'Nội dung:', value: paymentContent),
-                  const SizedBox(height: 12),
-                  Center(child: Image.network(vietQrUrl, height: 180)),
-                  const SizedBox(height: 6),
-                  Center(
-                    child: OutlinedButton.icon(
-                      onPressed: () => _downloadQr(vietQrUrl, 'vietqr.png'),
-                      icon: Icon(Icons.download, color: Colors.pinkAccent.shade100),
-                      label: Text('Lưu mã QR', style: TextStyle(color: Colors.pinkAccent.shade100)),
-                      style: OutlinedButton.styleFrom(
-                        side: BorderSide(color: Colors.pinkAccent.shade100),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                        backgroundColor: Colors.white,
-                      ),
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          final isMobile = constraints.maxWidth < 700;
+
+          return SingleChildScrollView(
+            padding: EdgeInsets.symmetric(horizontal: isMobile ? 16 : 48, vertical: isMobile ? 16 : 32),
+            child: Center(
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 700),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Số tiền cần thanh toán: ${widget.templatePrice}đ',
+                      style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
-                  ),
-                ],
-              ),
-            ),
-
-            const SizedBox(height: 16),
-
-            _buildPaymentOption(
-              method: PaymentMethod.momo,
-              title: 'Ví điện tử MoMo',
-              child: Column(
-                children: [
-                  const Divider(),
-                  _buildCopyRow(label: 'Số điện thoại:', value: "0395931862"),
-                  _buildCopyRow(label: 'Nội dung:', value: paymentContent),
-                  Center(child: Image.asset(momoQrUrl, height: 180)),
-                  const SizedBox(height: 6),
-                  Center(
-                    child: OutlinedButton.icon(
-                      onPressed: () => _downloadQr(momoQrUrl, 'wedding4u_momo.jpg'),
-                      icon: Icon(Icons.download, color: Colors.pinkAccent.shade100),
-                      label: Text('Lưu mã QR', style: TextStyle(color: Colors.pinkAccent.shade100)),
-                      style: OutlinedButton.styleFrom(
-                        side: BorderSide(color: Colors.pinkAccent.shade100),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                        backgroundColor: Colors.white,
-                      ),
+                    const SizedBox(height: 12),
+                    const Text(
+                      'Chọn hình thức thanh toán:',
+                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
                     ),
-                  ),
-                ],
-              ),
-            ),
+                    const SizedBox(height: 10),
 
-            if (showConfirmButton)
-              Padding(
-                padding: const EdgeInsets.only(top: 20),
-                child: SizedBox(
-                  width: double.infinity,
-                  child: OutlinedButton.icon(
-                    onPressed: () {
-                      showDialog(
-                        context: context,
-                        builder: (context) => AlertDialog(
-                          title: const Text('Xác nhận thanh toán'),
-                          content: const Text('Bạn đã hoàn tất thanh toán?'),
-                          actions: [
-                            TextButton(child: const Text('Hủy'), onPressed: () => Navigator.pop(context)),
-                            ElevatedButton(
-                              style: ElevatedButton.styleFrom(backgroundColor: Colors.pinkAccent.shade100),
-                              child: const Text('Xác nhận'),
-                              onPressed: () {
-                                Navigator.pop(context); // Đóng dialog
-                                Navigator.pop(context); // Quay về màn Home
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                    content: Text('Cảm ơn bạn đã thanh toán. Mẫu sẽ được kích hoạt sau khi xác minh.'),
-                                  ),
-                                );
-                              },
+                    _buildPaymentOption(
+                      method: PaymentMethod.bankTransfer,
+                      title: 'Chuyển khoản ngân hàng',
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Divider(),
+                          Text('Ngân hàng: $bankName', style: const TextStyle(fontSize: 16)),
+                          _buildCopyRow(label: 'Số tài khoản:', value: accountNumber),
+                          _buildCopyRow(label: 'Chủ tài khoản:', value: "NGUYEN MINH DUC"),
+                          _buildCopyRow(label: 'Nội dung:', value: paymentContent),
+                          const SizedBox(height: 12),
+                          Center(child: Image.network(vietQrUrl, height: 180)),
+                          const SizedBox(height: 6),
+                          Center(
+                            child: OutlinedButton.icon(
+                              onPressed: () => _downloadQr(vietQrUrl, 'vietqr.png'),
+                              icon: Icon(Icons.download, color: Colors.pinkAccent.shade100),
+                              label: Text('Lưu mã QR', style: TextStyle(color: Colors.pinkAccent.shade100)),
+                              style: OutlinedButton.styleFrom(
+                                side: BorderSide(color: Colors.pinkAccent.shade100),
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                                backgroundColor: Colors.white,
+                              ),
                             ),
-                          ],
-                        ),
-                      );
-                    },
-                    icon: Icon(Icons.check_circle, color: Colors.pinkAccent.shade100),
-                    label: Text('Tôi đã thanh toán', style: TextStyle(color: Colors.pinkAccent.shade100, fontSize: 16)),
-                    style: OutlinedButton.styleFrom(
-                      side: BorderSide(color: Colors.pinkAccent.shade100),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                      padding: const EdgeInsets.symmetric(vertical: 18),
-                      backgroundColor: Colors.white,
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
+                    const SizedBox(height: 16),
+
+                    _buildPaymentOption(
+                      method: PaymentMethod.momo,
+                      title: 'Ví điện tử MoMo',
+                      child: Column(
+                        children: [
+                          const Divider(),
+                          _buildCopyRow(label: 'Số điện thoại:', value: "0395931862"),
+                          _buildCopyRow(label: 'Nội dung:', value: paymentContent),
+                          Center(child: Image.asset(momoQrUrl, height: 180)),
+                          const SizedBox(height: 6),
+                          Center(
+                            child: OutlinedButton.icon(
+                              onPressed: () => _downloadQr(momoQrUrl, 'wedding4u_momo.jpg'),
+                              icon: Icon(Icons.download, color: Colors.pinkAccent.shade100),
+                              label: Text('Lưu mã QR', style: TextStyle(color: Colors.pinkAccent.shade100)),
+                              style: OutlinedButton.styleFrom(
+                                side: BorderSide(color: Colors.pinkAccent.shade100),
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                                backgroundColor: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    if (showConfirmButton)
+                      Padding(
+                        padding: const EdgeInsets.only(top: 24),
+                        child: SizedBox(
+                          width: double.infinity,
+                          child: OutlinedButton.icon(
+                            onPressed: () {
+                              showDialog(
+                                context: context,
+                                builder: (context) => AlertDialog(
+                                  title: const Text('Xác nhận thanh toán'),
+                                  content: const Text('Bạn đã hoàn tất thanh toán?'),
+                                  actions: [
+                                    TextButton(child: const Text('Hủy'), onPressed: () => Navigator.pop(context)),
+                                    ElevatedButton(
+                                      style: ElevatedButton.styleFrom(backgroundColor: Colors.pinkAccent.shade100),
+                                      child: const Text('Xác nhận'),
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                        Navigator.pop(context);
+                                        ScaffoldMessenger.of(context).showSnackBar(
+                                          const SnackBar(
+                                            content: Text(
+                                              'Cảm ơn bạn đã thanh toán. Mẫu sẽ được kích hoạt sau khi xác minh.',
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
+                            icon: Icon(Icons.check_circle, color: Colors.pinkAccent.shade100),
+                            label: Text(
+                              'Tôi đã thanh toán',
+                              style: TextStyle(color: Colors.pinkAccent.shade100, fontSize: 16),
+                            ),
+                            style: OutlinedButton.styleFrom(
+                              side: BorderSide(color: Colors.pinkAccent.shade100),
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                              padding: const EdgeInsets.symmetric(vertical: 18),
+                              backgroundColor: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
+                  ],
                 ),
               ),
-          ],
-        ),
+            ),
+          );
+        },
       ),
     );
   }

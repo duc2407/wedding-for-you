@@ -66,7 +66,6 @@ class _ManagerOrderState extends State<ManagerOrder> {
       appBar: AppBar(title: const Text("Thiệp đã mua"), backgroundColor: TWColors.pink.shade100, elevation: 0),
       body: Column(
         children: [
-          // Danh sách thiệp
           Expanded(
             child: Padding(
               padding: const EdgeInsets.all(16.0),
@@ -131,9 +130,7 @@ class _ManagerOrderState extends State<ManagerOrder> {
                                         ),
                                         const SizedBox(width: 8),
                                         ElevatedButton(
-                                          onPressed: () {
-                                            // TODO: Chuyển sang màn chỉnh sửa
-                                          },
+                                          onPressed: () {},
                                           style: ElevatedButton.styleFrom(
                                             backgroundColor: TWColors.pink.shade400,
                                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
@@ -163,7 +160,6 @@ class _ManagerOrderState extends State<ManagerOrder> {
               ),
             ),
           ),
-          // Thanh phân trang
           Container(
             padding: const EdgeInsets.symmetric(vertical: 12),
             decoration: BoxDecoration(
@@ -172,27 +168,39 @@ class _ManagerOrderState extends State<ManagerOrder> {
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: List.generate(totalPages, (i) {
-                final isActive = i == currentPage;
-                return GestureDetector(
-                  onTap: () => setState(() => currentPage = i),
-                  child: Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 6),
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                    decoration: BoxDecoration(
-                      color: isActive ? TWColors.pink.shade400 : TWColors.gray.shade200,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Text(
-                      '${i + 1}',
-                      style: GoogleFonts.openSans(
-                        color: isActive ? Colors.white : Colors.black87,
-                        fontWeight: FontWeight.w600,
+              children: [
+                IconButton(
+                  icon: const Icon(Icons.arrow_back_ios_new, size: 18),
+                  onPressed: currentPage > 0 ? () => setState(() => currentPage--) : null,
+                  color: currentPage > 0 ? TWColors.pink.shade400 : Colors.grey,
+                ),
+                ...List.generate(totalPages, (i) {
+                  final isActive = i == currentPage;
+                  return GestureDetector(
+                    onTap: () => setState(() => currentPage = i),
+                    child: Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 4),
+                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                      decoration: BoxDecoration(
+                        color: isActive ? TWColors.pink.shade400 : TWColors.gray.shade200,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Text(
+                        '${i + 1}',
+                        style: GoogleFonts.openSans(
+                          color: isActive ? Colors.white : Colors.black87,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     ),
-                  ),
-                );
-              }),
+                  );
+                }),
+                IconButton(
+                  icon: const Icon(Icons.arrow_forward_ios, size: 18),
+                  onPressed: currentPage < totalPages - 1 ? () => setState(() => currentPage++) : null,
+                  color: currentPage < totalPages - 1 ? TWColors.pink.shade400 : Colors.grey,
+                ),
+              ],
             ),
           ),
         ],
