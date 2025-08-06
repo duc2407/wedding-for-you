@@ -1,5 +1,5 @@
 import 'package:fe_wd24/screens/about/about.dart';
-import 'package:fe_wd24/screens/contact/contact_page.dart';
+import 'package:fe_wd24/screens/products/list_products_page.dart';
 import 'package:fe_wd24/screens/home/home_content.dart';
 import 'package:fe_wd24/screens/login/login_page.dart';
 import 'package:fe_wd24/screens/orders/manage_orders.dart';
@@ -20,7 +20,7 @@ class _HomePageState extends State<HomePage> {
   final bool isLoggedIn = true;
   final String userName = 'Nguyễn Minh Đức';
 
-  final List<Widget> pages = const [HomeContent(), ContactPage(), AboutPage(), ManagerOrder()];
+  final List<Widget> pages = const [HomeContent(), ListproductsPage(), AboutPage(), ManagerOrder()];
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +64,7 @@ class _HomePageState extends State<HomePage> {
                 Row(
                   children: [
                     _navItem('Trang chủ', 0),
-                    _navItem('Liên hệ', 1),
+                    _navItem('Danh sách mẫu', 1),
                     _navItem('Giới thiệu', 2),
                     if (isLoggedIn)
                       Row(children: [_navItem('Đã mua', 3), _buildUserMenu()])
@@ -174,7 +174,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               _mobileMenuItem('Trang chủ', 0, Icons.home),
-              _mobileMenuItem('Liên hệ', 1, Icons.contact_mail),
+              _mobileMenuItem('Danh sách mẫu', 1, Icons.contact_mail),
               _mobileMenuItem('Giới thiệu', 2, Icons.info_outline),
               const Divider(),
               if (!isLoggedIn)
