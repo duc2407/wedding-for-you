@@ -12,16 +12,16 @@ const RESOURCES = {"assets/AssetManifest.bin": "c6de0b8a0290ae11da6b35cd294463bd
 "assets/shaders/ink_sparkle.frag": "ecc85a2e95f5e9f53123dcaf8cb9b6ce",
 "assets/FontManifest.json": "5a32d4310a6f5d9a6b651e75ba0d7372",
 "assets/AssetManifest.json": "79441df1eaea5676215d5b86a5f49c36",
-"assets/fonts/MaterialIcons-Regular.otf": "6520286b72b5951156f07387c6525f95",
+"assets/fonts/MaterialIcons-Regular.otf": "fd9da3e7df2c69b897c8cbad3d96e545",
 "assets/AssetManifest.bin.json": "7e60253a495897bcde461296dba2298f",
-"assets/NOTICES": "bd3b06440c90db7f81b8bae736c8953b",
+"assets/NOTICES": "3511ecc41e383249c972b42d2df7cf18",
 "assets/packages/cupertino_icons/assets/CupertinoIcons.ttf": "33b7d9392238c04c131b6ce224e13711",
 "assets/packages/font_awesome_flutter/lib/fonts/fa-solid-900.ttf": "a2eb084b706ab40c90610942d98886ec",
 "assets/packages/font_awesome_flutter/lib/fonts/fa-regular-400.ttf": "3ca5dc7621921b901d513cc1ce23788c",
 "assets/packages/font_awesome_flutter/lib/fonts/fa-brands-400.ttf": "92702772796c2a5b73561455648acae4",
 "version.json": "7d6ebb7f614b0b638acc11a7bd34fb05",
 "manifest.json": "140963f2495cf9005802577196ebe3fc",
-"flutter_bootstrap.js": "10e3aa4598eb45651d44a415fcc7f0d3",
+"flutter_bootstrap.js": "d8700ff797705471682665022517dec5",
 "canvaskit/skwasm.wasm": "39dd80367a4e71582d234948adc521c0",
 "canvaskit/canvaskit.wasm": "7a3f4ae7d65fc1de6a6e7ddd3224bc93",
 "canvaskit/skwasm.js.symbols": "e72c79950c8a8483d826a7f0560573a1",
@@ -41,7 +41,7 @@ const RESOURCES = {"assets/AssetManifest.bin": "c6de0b8a0290ae11da6b35cd294463bd
 "icons/Icon-maskable-512.png": "301a7604d45b3e739efc881eb04896ea",
 "icons/logo.png": "34e0298465520f223106d7df32ef13ce",
 "icons/Icon-maskable-192.png": "c457ef57daa1d16f64b27b786ec2ea3c",
-"main.dart.js": "3449f3a292de0aad738a1823bde20c02"};
+"main.dart.js": "d95ee35482103b61e730d101613165c5"};
 // The application shell files that are downloaded before a service worker can
 // start.
 const CORE = ["main.dart.js",
