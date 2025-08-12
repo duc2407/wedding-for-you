@@ -30,9 +30,10 @@ class MyApp extends StatelessWidget {
         ],
       ),
       debugShowCheckedModeBanner: false,
+
       theme: ThemeData(
         scaffoldBackgroundColor: TWColors.gray.shade50,
-        textTheme: GoogleFonts.playfairDisplayTextTheme(),
+        textTheme: GoogleFonts.interTextTheme(),
         colorScheme: ColorScheme.fromSeed(seedColor: TWColors.pink.shade300),
         useMaterial3: true,
       ),
