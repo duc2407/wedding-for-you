@@ -42,6 +42,7 @@ dependencies:
   flutter_animate: 
   smooth_page_indicator:
   image_picker: 
+  animated_text_kit: ^4.2.3
 
 dev_dependencies:
   flutter_test:
