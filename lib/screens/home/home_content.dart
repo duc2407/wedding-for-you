@@ -64,19 +64,11 @@ class _HomeContentState extends State<HomeContent> {
                   Center(
                     child: Column(
                       children: [
-                        Text(
-                          "WEDDING FOR YOU",
-                          style: AppWidget.pinktextstyle(40),
-                          textAlign: TextAlign.center,
-                        ),
+                        Text("WEDDING FOR YOU", style: AppWidget.pinktextstyle(40), textAlign: TextAlign.center),
                         SizedBox(
                           height: 50,
                           child: CrossFadeText(
-                            texts: [
-                              'Thiệp Cưới Online',
-                              'Mời Cưới Online',
-                              'Mừng Cưới Online',
-                            ],
+                            texts: ['Thiệp Cưới Online', 'Mời Cưới Online', 'Mừng Cưới Online'],
                             style: AppWidget.normaltextstyle(32),
                             duration: Duration(milliseconds: 1500),
                             pause: Duration(seconds: 1),
@@ -94,18 +86,12 @@ class _HomeContentState extends State<HomeContent> {
                   Container(
                     width: MediaQuery.of(context).size.width,
                     padding: const EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: Colors.white,
-                    ),
+                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), color: Colors.white),
                     child: Column(
                       children: [
                         Container(
                           // padding: const EdgeInsets.only(left: 16, right: 16),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: Colors.white,
-                          ),
+                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), color: Colors.white),
                           child: Expanded(
                             flex: 2,
                             child: Row(
@@ -113,16 +99,12 @@ class _HomeContentState extends State<HomeContent> {
                               children: [
                                 Column(
                                   children: [
-                                    Text(
-                                      'Tạo thiệp cưới chưa bao giờ',
-                                      style: AppWidget.headlinertextstyle(15),
-                                    ),
+                                    Text('Tạo thiệp cưới chưa bao giờ', style: AppWidget.headlinertextstyle(15)),
                                     AnimatedTextKit(
                                       animatedTexts: [
                                         WavyAnimatedText(
                                           'dễ dàng đến thế',
-                                          textStyle:
-                                              AppWidget.pinktexnormaltstyle(16),
+                                          textStyle: AppWidget.pinktexnormaltstyle(16),
                                         ),
                                       ],
                                       isRepeatingAnimation: true,
@@ -131,12 +113,8 @@ class _HomeContentState extends State<HomeContent> {
                                 ),
                                 const SizedBox(width: 16),
                                 SizedBox(
-                                  width:
-                                      MediaQuery.of(context).size.width / 2.7,
-                                  child: Image.asset(
-                                    'assets/images/banner.jpg',
-                                    fit: BoxFit.cover,
-                                  ),
+                                  width: MediaQuery.of(context).size.width / 2.7,
+                                  child: Image.asset('assets/images/banner.jpg', fit: BoxFit.cover),
                                 ),
                               ],
                             ),
@@ -151,20 +129,10 @@ class _HomeContentState extends State<HomeContent> {
 
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color.fromARGB(
-                              255,
-                              255,
-                              153,
-                              189,
-                            ),
+                            backgroundColor: const Color.fromARGB(255, 255, 153, 189),
                             foregroundColor: Colors.white,
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 24,
-                              vertical: 16,
-                            ),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
+                            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                           ),
                           onPressed: () {},
                           child: const Text("Thử ngay nào"),
@@ -179,15 +147,9 @@ class _HomeContentState extends State<HomeContent> {
                     child: Container(
                       width: MediaQuery.of(context).size.width,
                       padding: const EdgeInsets.all(16),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: Colors.white,
-                      ),
+                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), color: Colors.white),
                       child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(20),
-                        ),
+                        decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(20)),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
@@ -215,14 +177,11 @@ class _HomeContentState extends State<HomeContent> {
                       padding: const EdgeInsets.all(16.0),
                       child: LayoutBuilder(
                         builder: (context, constraints) {
-                          int crossAxisCount = constraints.maxWidth < 600
-                              ? 1
-                              : 2;
+                          int crossAxisCount = constraints.maxWidth < 600 ? 1 : 2;
                           return GridView.count(
                             crossAxisCount: crossAxisCount,
                             shrinkWrap: true, // co lại vừa đủ nội dung
-                            physics:
-                                NeverScrollableScrollPhysics(), // tắt scroll
+                            physics: NeverScrollableScrollPhysics(), // tắt scroll
                             children: <Widget>[
                               FeatureCard(
                                 title: "1. Thông tin Đám cưới",
@@ -282,10 +241,7 @@ class _HomeContentState extends State<HomeContent> {
       ),
       padding: const EdgeInsets.all(10),
       width: double.infinity,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [Text(title), Text('Xem thêm')],
-      ),
+      child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [Text(title), Text('Xem thêm')]),
     );
   }
 
@@ -301,12 +257,7 @@ class _HomeContentState extends State<HomeContent> {
           return CardProduct(
             product: product,
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (_) => ProductDetailScreen(product: product),
-                ),
-              );
+              Navigator.push(context, MaterialPageRoute(builder: (_) => ProductDetailScreen(product: product)));
             },
           );
         },
